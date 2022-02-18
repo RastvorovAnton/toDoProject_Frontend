@@ -16,7 +16,6 @@ window.onload = init = async () => {
 };
 
 const onClickButton = async () => {
-
   const resp = await fetch("http://localhost:8000/createNewTask", {
     method: "POST",
     headers: {
@@ -66,9 +65,7 @@ const render = () => {
       input.type = "text";
       input.value = item.text;
       input.className = "input-text-task";
-      input.onchange = (e) => {
-        inputResult = e.target.value;
-      };
+      input.onchange = (e) => { inputResult = e.target.value };
       container.appendChild(input);
 
       const imageDone = document.createElement("img");
@@ -140,9 +137,7 @@ const saveEditFunction = async (index) => {
       "Content-Type": "application/json;charset=utf-8",
       "Access-Control-Allow-Origin": "*",
     },
-    body: JSON.stringify({
-      text: inputResult
-    }),
+    body: JSON.stringify({ text: inputResult }),
   });
   editTasks = null;
   const result = await resp.json();

@@ -16,24 +16,29 @@ window.onload = init = async () => {
 };
 
 const onClickButton = async () => {
-  const resp = await fetch("http://localhost:8000/createNewTask", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-      "Access-Control-Allow-Origin": "*",
-    },
-    body: JSON.stringify({
-      text: valueInput,
-      isCheck: false,
-    }),
-  });
+  if (valueInput.trim() != "") {
+    const resp = await fetch("http://localhost:8000/createNewTask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        text: valueInput,
+        isCheck: false,
+      }),
+    });
 
-  const result = await resp.json();
-  allTasks.push(result);
+    const result = await resp.json();
+    allTasks.push(result);
 
-  valueInput = "";
-  input.value = "";
-  render();
+    valueInput = "";
+    input.value = "";
+    render();
+  }
+  else {
+    alert("Не начинайте с пробела");
+  }
 };
 
 const updateValue = (event) => {
@@ -47,7 +52,6 @@ const render = () => {
   }
 
   allTasks.sort((a, b) => a.isCheck - b.isCheck);
-
   allTasks.map((item, index) => {
     const container = document.createElement("div");
     container.id = `task-${index}`;
@@ -65,12 +69,12 @@ const render = () => {
       input.type = "text";
       input.value = item.text;
       input.className = "input-text-task";
-      input.onchange = (e) => { inputResult = e.target.value };
+      input.onchange = (e) => inputResult = e.target.value;
       container.appendChild(input);
 
       const imageDone = document.createElement("img");
       imageDone.src = "done.png";
-      imageDone.onclick = () => saveEditFunction(index);
+      imageDone.onclick = () => saveEditFunction(allTasks[index]._id);
       container.appendChild(imageDone);
 
       const imageCancel = document.createElement("img");
@@ -91,28 +95,18 @@ const render = () => {
         imageEdit.className = "image-edit-none";
       }
 
-      if (item.isCheck) {
-        container.className = "task-block-done";
-        imageEdit.style.display = "none";
-      }
-
       const imageDelete = document.createElement("img");
       imageDelete.src = "delete.png";
-      imageDelete.onclick = () => removeTasks(item, index);
+      imageDelete.onclick = () => removeTasks(item._id);
       container.appendChild(imageDelete);
     }
-
+    container.className = item.isCheck ? "task-block-done" : "task-container";
     content.appendChild(container);
   });
 };
 
-const onChangeCheckbox = (index) => {
-  allTasks[index].isCheck = !allTasks[index].isCheck;
-  render();
-};
-
 const removeTasks = async (item) => {
-  const resp = await fetch(`http://localhost:8000/deleteTask?id=${item._id}`, {
+  const resp = await fetch(`http://localhost:8000/deleteTask?id=${item}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -126,13 +120,12 @@ const removeTasks = async (item) => {
 
 const editTasksFunction = (index) => {
   editTasks = index;
-  const inputResult = allTasks[index];
-  const { text } = inputResult;
+  inputResult = allTasks[index].text;
   render();
 };
 
-const saveEditFunction = async (index) => {
-  const resp = await fetch(`http://localhost:8000/updateTask?id=${allTasks[editTasks]._id}`, {
+const saveEditFunction = async (id) => {
+  const resp = await fetch(`http://localhost:8000/updateTask?id=${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -149,5 +142,10 @@ const saveEditFunction = async (index) => {
 const cancelEditFunction = () => {
   editTasks = null;
   inputResult = "";
+  render();
+};
+
+const onChangeCheckbox = (index) => {
+  allTasks[index].isCheck = !allTasks[index].isCheck;
   render();
 };

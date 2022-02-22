@@ -60,6 +60,10 @@ button {
   gap: 25px;
   border: 2px solid #000000;
   background-color: #512da8;
+  line-break: anywhere;
+  overflow: auto;
+  width: 27em;
+  height: 10em;
 }
 
 .task-container-done {
@@ -106,9 +110,15 @@ button {
 }
 
 .text-task {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   margin-left: 10px;
   font-size: 20px;
   color: black;
+  width: 12em;
+  height: 6em;
 }
 
 .done-text {
@@ -129,6 +139,8 @@ p {
 }
 
 img {
+  display: flex;
+  justify-content: center;
   width: 1.5em;
 }
 
@@ -136,9 +148,17 @@ img {
   background-color: #00e8f0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-top: 10px;
   gap: 25px;
   border: 2px solid #000000;
   text-decoration-line: line-through;
+  line-break: anywhere;
+  overflow: auto;
+  width: 27em;
+  height: 10em;
+}
+
+.task-block-done .image-edit-none {
+  display: none;
 }

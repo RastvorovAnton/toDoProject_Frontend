@@ -126,7 +126,8 @@ const removeTasks = async (item) => {
 
 const editTasksFunction = (index) => {
   editTasks = index;
-  inputResult = allTasks[index].text;
+  const inputResult = allTasks[index];
+  const { text } = inputResult;
   render();
 };
 

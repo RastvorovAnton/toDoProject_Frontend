@@ -2,6 +2,21 @@
   pointer-events: none;
 }
 
+.scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 125px;
+  z-index: 2;
+  margin-bottom: 50px;
+  background-color: #164f81;
+}
+
 body {
   background-color: #164f81;
   display: flex;
@@ -49,7 +64,9 @@ button {
   flex-direction: column;
   justify-content: center;
   border-top: none;
-  margin-top: 42px;
+  overflow: auto;
+  width: 100%;
+  position: sticky;
 }
 
 .task-container {
@@ -92,6 +109,7 @@ button {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  padding-bottom: 30px;
 }
 
 .task-container img {
@@ -161,4 +179,128 @@ img {
 
 .task-block-done .image-edit-none {
   display: none;
+}
+
+@media screen and (max-width: 915px) {
+  .task-container {
+    width: 26em;
+    height: 10em;
+  }
+
+  .text-task {
+    font-size: 20px;
+    width: 8em;
+    height: 6em;
+  }
+
+  .task-block-done {
+    width: 26em;
+    height: 10em;
+  }
+
+  .scroll {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 101%;
+    height: 125px;
+    z-index: 2;
+    margin-bottom: 50px;
+    background-color: #164f81;
+  }
+
+  #content-page {
+    overflow: scroll;
+    width: 100%;
+    position: sticky;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .task-container {
+    width: 20em;
+    height: 10em;
+  }
+
+  .text-task {
+    width: 12em;
+    height: 6em;
+  }
+
+  .task-block-done {
+    width: 20em;
+    height: 10em;
+  }
+
+  .scroll {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 102%;
+    height: 125px;
+    z-index: 2;
+    margin-bottom: 50px;
+    background-color: #164f81;
+  }
+
+  #content-page {
+    overflow: scroll;
+    width: 100%;
+    position: sticky;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .task-container {
+    width: 16em;
+    height: 6em;
+  }
+
+  .input-text-task {
+    width: 110px;
+  }
+
+  .task-container img {
+    width: 1.2em;
+  }
+
+  .text-task {
+    width: 10em;
+    height: 6em;
+    font-size: 14px;
+  }
+
+  .task-block-done {
+    width: 16em;
+    height: 6em;
+  }
+
+  .scroll {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 125px;
+    z-index: 2;
+    margin-bottom: 50px;
+    background-color: #164f81;
+  }
+
+  #content-page {
+    overflow: scroll;
+    width: 100%;
+    position: sticky;
+  }
 }

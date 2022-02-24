@@ -37,7 +37,7 @@ const onClickButton = async () => {
     render();
   }
   else {
-    alert("Не начинайте с пробела");
+    alert("Введите корректное значение, поле не должно быть пустым");
   }
 };
 
@@ -52,7 +52,6 @@ const render = () => {
   }
 
   allTasks.sort((a, b) => a.isCheck - b.isCheck);
-
   allTasks.map((item, index) => {
     const container = document.createElement("div");
     container.id = `task-${index}`;
@@ -126,7 +125,7 @@ const editTasksFunction = (index) => {
 };
 
 const saveEditFunction = async (id) => {
-  const resp = await fetch(`http://localhost:8000/updateTask`, {
+  const resp = await fetch("http://localhost:8000/updateTask", {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -149,7 +148,20 @@ const cancelEditFunction = () => {
   render();
 };
 
-const onChangeCheckbox = (index) => {
-  allTasks[index].isCheck = !allTasks[index].isCheck;
+const onChangeCheckbox = async (index) => {
+  const { _id, isCheck } = allTasks[index];
+  const resp = await fetch("http://localhost:8000/updateTask", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      "Access-Control-Allow-Origin": "*"
+    },
+    body: JSON.stringify({
+      _id,
+      isCheck: !isCheck,
+    })
+  });
+  const result = await resp.json();
+  allTasks = result.data;
   render();
 };

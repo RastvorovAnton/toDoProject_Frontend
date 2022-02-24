@@ -2,7 +2,7 @@
   pointer-events: none;
 }
 
-.scroll{
+.scroll {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -197,7 +197,8 @@ img {
     width: 26em;
     height: 10em;
   }
-  .scroll{
+
+  .scroll {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -211,7 +212,8 @@ img {
     margin-bottom: 50px;
     background-color: #164f81;
   }
-  #content-page{
+
+  #content-page {
     overflow: scroll;
     width: 100%;
     position: sticky;
@@ -233,7 +235,8 @@ img {
     width: 20em;
     height: 10em;
   }
-  .scroll{
+
+  .scroll {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -247,7 +250,8 @@ img {
     margin-bottom: 50px;
     background-color: #164f81;
   }
-  #content-page{
+
+  #content-page {
     overflow: scroll;
     width: 100%;
     position: sticky;
@@ -278,7 +282,8 @@ img {
     width: 16em;
     height: 6em;
   }
-  .scroll{
+
+  .scroll {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -292,7 +297,8 @@ img {
     margin-bottom: 50px;
     background-color: #164f81;
   }
-  #content-page{
+
+  #content-page {
     overflow: scroll;
     width: 100%;
     position: sticky;
